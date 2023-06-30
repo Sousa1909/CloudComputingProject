@@ -1,0 +1,29 @@
+lb01 ansible_host=192.168.33.51
+web01 ansible_host=192.168.33.52
+web02 ansible_host=192.168.33.53
+web03 ansible_host=192.168.33.54
+dbmaster ansible_host=192.168.33.55
+dbreplicate1 ansible_host=192.168.33.56
+dbreplicate2 ansible_host=192.168.33.57
+
+[loadbalancer]
+lb01
+
+[web]
+web01
+web02
+web03
+
+[databases]
+dbmaster
+dbreplicate1
+dbreplicate2
+
+[all_nodes]
+lb01
+web01
+web02
+web03
+dbmaster
+dbreplicate1
+dbreplicate2

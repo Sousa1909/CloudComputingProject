@@ -1,0 +1,61 @@
+---
+- name: Database
+  hosts: databases
+  tasks:
+    - name: Install PostgreSQL and its PHP extension
+      apt:
+        name:
+          - postgresql
+          - postgresql-contrib
+          - php-pgsql
+        state: present
+
+    - name: Create a new PostgreSQL user and database
+      become_user: postgres
+      postgresql_user:
+        name: "{{ postgresql_username }}"
+        password: "{{ postgresql_password }}"
+        encrypted: yes
+      become: true
+
+    - name: Create a new PostgreSQL database
+      become_user: postgres
+      postgresql_db:
+        name: "{{ postgresql_database }}"
+        owner: "{{ postgresql_username }}"
+      become: true
+
+    - name: Grant all privileges on the PostgreSQL database to the user
+      become_user: postgres
+      postgresql_privs:
+        db: "{{ postgresql_database }}"
+        privs: ALL
+        role: "{{ postgresql_username }}"
+        objs: ALL_IN_SCHEMA
+      become: true
+
+    - name: Import dump.sql and set user privileges
+      become_user: postgres
+      postgresql_db:
+        name: "{{ postgresql_database }}"
+        state: import
+        target: /vagrant/provision/dump.sql
+      become: true
+
+    - name: View users and databases in PostgreSQL
+      become_user: postgres
+      command: psql -c "\du"
+      register: postgresql_users
+      become: true
+
+    - debug:
+        var: postgresql_users.stdout_lines
+
+    - name: View databases in PostgreSQL
+      become_user: postgres
+      command: psql -c "\list"
+      register: postgresql_databases
+      become: true
+
+    - debug:
+        var: postgresql_databases.stdout_lines

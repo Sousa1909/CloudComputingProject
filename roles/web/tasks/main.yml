@@ -1,0 +1,29 @@
+- hosts: web
+- name: Install PHP-FPM and necessary modules
+  apt:
+    name:
+      - php
+      - php-fpm
+      - php-common
+      - php-cli
+      - php-mysql
+      - php-pgsql
+      - php-pdo
+      - php-mbstring
+      - php-zip
+      - zip
+      - unzip
+    state: present
+
+
+- name: Ansible Copy Example Local to Remote
+  hosts: web
+  tasks:
+    - name: copying file with playbook
+      become: true 
+      copy:
+        src:  ../app/.
+        dest: /usr/src/webapp/
+        owner: nginx
+        group: nginx      
+        mode: 0644
