@@ -15,6 +15,10 @@ RUN apt-get update && \
     php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
     composer install
 
+# Set permissions for CSS files
+RUN chmod 644 /usr/src/webapp/public_html/css/bootstrap.min.css \
+    && chmod 644 /usr/src/webapp/public_html/css/site.css
+
 # Open Port
 EXPOSE 9000
 
