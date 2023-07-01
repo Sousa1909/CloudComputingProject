@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: /app
+      dockerfile: Dockerfile.app
+
+  db:
+    build:
+      context: /provision
+      dockerfile: Dockerfile.db
+    environment:
+      - POSTGRES_PASSWORD=VerySafePassword
+
+  websockets:
+    build:
+      context: /ws
+      dockerfile: Dockerfile.websockets
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - 80:80
+
+# build:  docker-compose build
+# run:    docker-compose run

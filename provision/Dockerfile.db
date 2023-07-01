@@ -1,0 +1,13 @@
+FROM postgres:latest
+
+# Copy the SQL script to initialize the database
+COPY dump.sql /docker-entrypoint-initdb.d/
+
+# Expose the PostgreSQL port (5432 by default)
+EXPOSE 5432
+
+# Start the PostgreSQL server
+CMD ["postgres"]
+
+# build: docker build -t database .
+# run:   docker run -it --rm --name Database database 
