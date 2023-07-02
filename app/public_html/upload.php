@@ -85,8 +85,9 @@
       $images = glob($imageDir . '*.jpg');
       
       foreach ($images as $image) {
+        $imagePath = $_SERVER['DOCUMENT_ROOT'] . '/' . $image;
         echo '<div class="col-md-4 mb-3">';
-        echo '<img src="' . $image . '" class="img-fluid">';
+        echo '<img src="' . $imagePath . '" class="img-fluid">';
         echo '</div>';
       }
       ?>
