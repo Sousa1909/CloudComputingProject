@@ -1,0 +1,10 @@
+# Variables
+nginx_nodes:
+  - ip: 192.168.33.52
+    weight: 3
+
+  - ip: 192.168.33.53
+
+  - ip: 192.168.33.54
+  
+jpeg_proxy_pass: 192.168.33.53

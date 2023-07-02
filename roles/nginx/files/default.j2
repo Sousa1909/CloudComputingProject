@@ -1,0 +1,20 @@
+# /etc/nginx/sites-enabled/default
+upstream nodes {
+    {% for node in nginx_nodes %}
+    server {{ node.ip }} weight={{ node.weight }};
+    {% endfor %}
+}
+
+server {
+    listen 80;
+    server_name localhost; 
+
+    location / {
+        proxy_pass http://nodes;
+        proxy_set_header Host $host;
+    }
+    location ~* \.jpg$ {
+      proxy_pass http:// {{ jpeg_proxy_pass }};
+      proxy_set_header Host $host;
+    }
+}
