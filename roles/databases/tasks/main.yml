@@ -13,31 +13,31 @@
     - name: Create a new PostgreSQL user and database
       become_user: postgres
       postgresql_user:
-        name: "{{ postgresql_username }}"
-        password: "{{ postgresql_password }}"
+        name: "{{ joãodomingues }}"
+        password: "{{ 12345678 }}"
         encrypted: yes
       become: true
 
     - name: Create a new PostgreSQL database
       become_user: postgres
       postgresql_db:
-        name: "{{ postgresql_database }}"
-        owner: "{{ postgresql_username }}"
+        name: "{{ gatos }}"
+        owner: "{{ joãodomingues }}"
       become: true
 
     - name: Grant all privileges on the PostgreSQL database to the user
       become_user: postgres
       postgresql_privs:
-        db: "{{ postgresql_database }}"
+        db: "{{ gatos }}"
         privs: ALL
-        role: "{{ postgresql_username }}"
+        role: "{{ joãodomingues }}"
         objs: ALL_IN_SCHEMA
       become: true
 
     - name: Import dump.sql and set user privileges
       become_user: postgres
       postgresql_db:
-        name: "{{ postgresql_database }}"
+        name: "{{ gatos }}"
         state: import
         target: /vagrant/provision/dump.sql
       become: true
