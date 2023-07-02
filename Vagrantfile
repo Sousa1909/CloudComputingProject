@@ -13,12 +13,11 @@ Vagrant.configure("2") do |config|
       v.memory = 760
      # v.linked_clone = true
     end
-    ansible.vm.provision "shell", path: "provision/install_ansible.sh"
+    ansible.vm.provision "shell", path: "./provision/install_ansible.sh"
 
     ansible.vm.provision "shell", privileged: false, inline: <<-SHELL
       ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
     SHELL
-    ansible.vm.synced_folder '.', '/vagrant', disabled: false
 
   end
 
@@ -33,9 +32,10 @@ Vagrant.configure("2") do |config|
       v.linked_clone = true
     end
 
-    lb01.vm.provision "shell", path: "roles/nginx/tasks/main.yml"
-    
-    lb01.vm.synced_folder '.', '/vagrant', disabled: true
+    lb01.vm.provision "ansible" do |ansible|
+      ansible.playbook = "roles/nginx/tasks/main.yml"
+    end
+  
   end
 
   config.vm.define "web01" do |web01|
@@ -49,10 +49,11 @@ Vagrant.configure("2") do |config|
       # v.cpus = 2
       v.linked_clone = true
     end
-    
-    web01.vm.provision "shell", path: "roles/web/tasks/main.yml"
 
-    web01.vm.synced_folder '.', '/vagrant', disabled: true
+    web01.vm.provision "ansible" do |ansible|
+      ansible.playbook = "roles/web/tasks/main.yml"
+    end
+     
   end
 
   config.vm.define "web02" do |web02|
@@ -67,9 +68,10 @@ Vagrant.configure("2") do |config|
       v.linked_clone = true
     end
     
-    web02.vm.provision "shell", path: "roles/web/tasks/main.yml"
+    web02.vm.provision "ansible" do |ansible|
+      ansible.playbook = "roles/web/tasks/main.yml"
+    end
 
-    web02.vm.synced_folder '.', '/vagrant', disabled: true
   end
 
   config.vm.define "web03" do |web03|
@@ -84,9 +86,10 @@ Vagrant.configure("2") do |config|
       v.linked_clone = true
     end
     
-    web03.vm.provision "shell", path: "roles/web/tasks/main.yml"
+    web03.vm.provision "ansible" do |ansible|
+      ansible.playbook = "roles/web/tasks/main.yml"
+    end
 
-    web03.vm.synced_folder '.', '/vagrant', disabled: true
   end
  
 

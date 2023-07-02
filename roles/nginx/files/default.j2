@@ -1,8 +1,8 @@
 # /etc/nginx/sites-enabled/default
 upstream nodes {
-    server 192.168.33.52 weight=3;
-    server 192.168.33.53;
-    server 192.168.33.54;
+    {% for node in nginx_nodes %}
+    server {{ node.ip }} weight={{ node.weight }};
+    {% endfor %}
 }
 
 server {
@@ -14,7 +14,7 @@ server {
         proxy_set_header Host $host;
     }
     location ~* \.jpg$ {
-      proxy_pass http://192.168.33.53;
+      proxy_pass http:// {{ jpeg_proxy_pass }};
       proxy_set_header Host $host;
     }
 }
