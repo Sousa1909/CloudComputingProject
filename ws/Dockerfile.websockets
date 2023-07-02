@@ -15,6 +15,9 @@ RUN apt-get update && \
     php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
     composer install
 
+EXPOSE 8000
+
+
 # Start the Websockets server
 CMD ["php", "./websockets_server.php"]
 

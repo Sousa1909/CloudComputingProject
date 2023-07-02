@@ -5,6 +5,8 @@ services:
     build:
       context: /app
       dockerfile: Dockerfile.app
+    volumes:
+      - ./gallery:/usr/scr/webapp/public_html/gallery
 
   db:
     build:
@@ -17,6 +19,8 @@ services:
     build:
       context: /ws
       dockerfile: Dockerfile.websockets
+    ports:
+      - 8000:8000
 
   nginx:
     build:
@@ -26,4 +30,4 @@ services:
       - 80:80
 
 # build:  docker-compose build
-# run:    docker-compose run
+# run:    docker-compose up

@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
       node.vm.provider "virtualbox" do |v|
         v.name = "ProjectA-webapp"
         v.memory = 2048
-        v.cpus = 2jogui@
+        v.cpus = 2
         v.linked_clone = true
       end
       node.vm.provision "shell", path: "./provision/web.sh"
