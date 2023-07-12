@@ -1,27 +1,26 @@
 ---
-    - name: Update apt cache and install Nginx
-      apt:
-        name: nginx
-        state: latest
-        update_cache: yes
+  - name: Update apt cache and install Nginx
+    apt:
+      name: nginx
+      state: latest
+      update_cache: yes
 
-    # server handling requests 
-    - name: Copy projectA.j2 file of NGINX
-      template:
-        src: projectA.j2
-        dest: /etc/nginx/conf.d/myApp.conf
-        mode: preserve
-      notify: Restart Nginx service
+  - name: Copy projectA.j2 file of NGINX
+    template:
+      src: ../files/projectA.j2
+      dest: /etc/nginx/conf.d/myApp.conf
+      mode: preserve
+    
 
-    # load balancer configuration
-    - name: Copy default.j2 file of NGINX
-      template:
-        src: default.j2
-        dest: /etc/nginx/conf.d/default.conf
-        mode: preserve
-      notify: Restart Nginx service
+  - name: Copy default.j2 file of NGINX
+    template:
+      src: ../files/default.j2
+      dest: /etc/nginx/conf.d/default.conf
+      mode: preserve
+    
 
-    - name: Restart Nginx service
-      service:
-        name: nginx
-        state: restarted
+  - name: Restart Nginx service
+    become: true
+    systemd:
+      name: nginx
+      state: restarted
