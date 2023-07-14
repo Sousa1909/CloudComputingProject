@@ -5,6 +5,7 @@ web03 ansible_host=192.168.33.54
 dbmaster ansible_host=192.168.33.55
 dbreplicate1 ansible_host=192.168.33.56
 dbreplicate2 ansible_host=192.168.33.57
+webapp ansible_host=192.168.44.10
 
 [loadbalancer]
 lb01
@@ -13,6 +14,7 @@ lb01
 web01
 web02
 web03
+webapp
 
 [databases]
 dbmaster
@@ -27,3 +29,4 @@ web03
 dbmaster
 dbreplicate1
 dbreplicate2
+webapp
