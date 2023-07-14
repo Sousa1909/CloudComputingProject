@@ -1,7 +1,7 @@
 # This is for NGINX
 server {
     listen 80;
-    server_name myapp.com;
+    server_name localhost;
 
     root /usr/src/webapp/public_html;
     index index.php index.html;
@@ -12,7 +12,7 @@ server {
 
     location ~ \.php$ {
         include fastcgi_params;
-        fastcgi_pass app:9000;
+        fastcgi_pass localhost:9000;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }

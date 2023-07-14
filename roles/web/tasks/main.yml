@@ -31,7 +31,7 @@
     - name: Update Composer dependencies
       command: composer install
       args:
-        chdir: /usr/src/webapp
+        chdir: /var/www/html
       become: true
 
 - name: Ansible Copy Example Local to Remote
@@ -40,8 +40,8 @@
   tasks:
     - name: copying file with playbook
       copy:
-        src: ../app/.
-        dest: /usr/src/webapp/
+        src: /vagrant/app/public_html
+        dest: /var/www/html
         owner: nginx
         group: nginx      
         mode: '0644'

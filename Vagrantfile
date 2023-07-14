@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "lb01" do |lb01|
-    lb01.vm.box = "bento/ubuntu-22.04"
+    lb01.vm.box = "generic/ubuntu-22.04"
     lb01.vm.hostname = "lb01"
     lb01.vm.network "private_network", ip: '192.168.33.51'
 
@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
       # v.cpus = 2
       v.linked_clone = true
     end
-    web01.vm.provision "shell", path: "provision.sh" 
+    web01.vm.provision "shell", path: "provision/web.sh" 
     web01.vm.synced_folder '.', '/vagrant', disabled: true
   end
 
@@ -60,7 +60,7 @@ Vagrant.configure("2") do |config|
       # v.cpus = 2
       v.linked_clone = true
     end
-    web02.vm.provision "shell", path: "provision.sh"
+    web02.vm.provision "shell", privileged: true, path: "provision/web.sh"
     web02.vm.synced_folder '.', '/vagrant', disabled: true
   end
 
