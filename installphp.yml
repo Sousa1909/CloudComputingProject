@@ -1,5 +1,0 @@
-- name: Install NGINX
-  hosts: web
-  become: true
-  roles:
-    - /vagrant/roles/web/tasks

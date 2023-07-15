@@ -81,4 +81,22 @@ Vagrant.configure("2") do |config|
       #node.vm.synced_folder "app/", "/var/www/html"
     end
 
+
+    config.vm.define "dbmaster" do |dbmaster|
+      dbmaster.vm.box = "bento/ubuntu-22.04"
+      dbmaster.vm.hostname = "dbmaster"
+      dbmaster.vm.network "private_network", ip: '192.168.33.55'
+  
+      dbmaster.vm.provider "virtualbox" do |v|
+        v.name = "dbmaster-ProjetoA"
+        v.memory = 850
+        v.cpus = 2
+        v.linked_clone = true
+      end
+      dbmaster.vm.provision "shell", privileged: true, path: "./provision/databases.sh"
+      dbmaster.vm.provision "shell", privileged: false, inline: <<-SHELL
+      SHELL
+      dbmaster.vm.synced_folder '.', '/vagrant', disabled: true
+    end
+
 end
