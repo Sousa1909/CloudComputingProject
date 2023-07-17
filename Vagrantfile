@@ -96,7 +96,7 @@ Vagrant.configure("2") do |config|
       dbmaster.vm.provision "shell", privileged: true, path: "./provision/databases.sh"
       dbmaster.vm.provision "shell", privileged: false, inline: <<-SHELL
       SHELL
-      dbmaster.vm.synced_folder '.', '/vagrant', disabled: true
+      dbmaster.vm.synced_folder '.', '/vagrant'
     end
 
     config.vm.define "websockets" do |websockets|
@@ -113,7 +113,7 @@ Vagrant.configure("2") do |config|
       websockets.vm.provision "shell", privileged: true, path: "./provision/websockets.sh"
       websockets.vm.provision "shell", privileged: false, inline: <<-SHELL
       SHELL
-      websockets.vm.synced_folder '.', '/vagrant', disabled: true
+      websockets.vm.synced_folder '.', '/vagrant'
     end
 
 end

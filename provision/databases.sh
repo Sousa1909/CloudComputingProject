@@ -16,6 +16,8 @@ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;
 
 sudo systemctl restart postgresql
 
+# PGPASSWORD=mypassword sudo -u postgres psql -U myuser -h 192.168.33.55 -d mydatabase -f /vagrant/provision/dump.sql # change to ./provision/dump.sql
+
 sudo -u postgres psql -d mydatabase -f /vagrant/provision/dump.sql
 
 sudo -u postgres psql -d mydatabase -c "GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE messages TO myuser;"
@@ -24,10 +26,10 @@ sudo -u postgres psql -d mydatabase -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SC
 sudo -u postgres psql -d mydatabase -c "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO myuser;"
 sudo -u postgres psql -d mydatabase -c "GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;"
 
-#sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /etc/postgresql/14/main/postgresql.conf
+sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /etc/postgresql/14/main/postgresql.conf
 
 
-#sudo sh -c "echo 'host    all    all    192.168.33.48/28    scram-sha-256' >> /etc/postgresql/14/main/pg_hba.conf"
+sudo sh -c "echo 'host    all    all    192.168.33.48/28    scram-sha-256' >> /etc/postgresql/14/main/pg_hba.conf"
 
 sudo -u postgres psql -c "\du"
 sudo -u postgres psql -c "\list"

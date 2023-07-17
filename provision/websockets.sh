@@ -13,7 +13,7 @@ curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 echo -e "$MSG_COLOR$(hostname): Install dependencies for websockets server\033[0m"
-cd /home/vagrant
+cd /vagrant/ws
 
 #if [ ! -d "ws" ]; then
  #   mkdir ws
@@ -22,3 +22,5 @@ cd /home/vagrant
 #cd ws
 
 sudo -u vagrant bash -c 'composer install'
+
+#ssh fazer a parte do github do stor
