@@ -14,7 +14,7 @@ sudo -u postgres psql -c "CREATE USER myuser WITH PASSWORD 'mypassword';"
 sudo -u postgres psql -c "CREATE DATABASE mydatabase OWNER myuser;"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;"
 
-#sudo systemctl restart postgresql
+sudo systemctl restart postgresql
 
 sudo -u postgres psql -d mydatabase -f /vagrant/provision/dump.sql
 
@@ -33,7 +33,7 @@ sudo -u postgres psql -c "\du"
 sudo -u postgres psql -c "\list"
 sudo -u postgres psql -d mydatabase -c "\dt"
 
-#sudo systemctl restart postgresql
+sudo systemctl restart postgresql
 
 cd /vagrant/app
 ISO_DATE=$(TZ=Europe/Lisbon date -Iseconds)

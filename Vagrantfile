@@ -99,4 +99,21 @@ Vagrant.configure("2") do |config|
       dbmaster.vm.synced_folder '.', '/vagrant', disabled: true
     end
 
+    config.vm.define "websockets" do |websockets|
+      websockets.vm.box = "bento/ubuntu-22.04"
+      websockets.vm.hostname = "websockets"
+      websockets.vm.network "private_network", ip: '192.168.33.56'
+  
+      websockets.vm.provider "virtualbox" do |v|
+        v.name = "websockets-ProjetoA"
+        v.memory = 850
+        v.cpus = 2
+        v.linked_clone = true
+      end
+      websockets.vm.provision "shell", privileged: true, path: "./provision/websockets.sh"
+      websockets.vm.provision "shell", privileged: false, inline: <<-SHELL
+      SHELL
+      websockets.vm.synced_folder '.', '/vagrant', disabled: true
+    end
+
 end
