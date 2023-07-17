@@ -1,8 +1,10 @@
-<?php include '_dotenv.php'; ?>
+<?php 
+include '_dotenv.php'; 
 
-<?php
 session_set_cookie_params(86400); // Set the session cookie's lifetime to 24 hours (in seconds)
 session_start();
+?>
+<?php
 
 // Check if the destroy session button is clicked
 if (isset($_POST['destroy'])) {

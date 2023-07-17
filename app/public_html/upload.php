@@ -31,6 +31,7 @@
       // Check if the uploaded file is a JPG image
       if ($fileType === 'jpg' || $fileType === 'jpeg') {
         if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+          echo "File moved successfully to: " . $targetPath . "<br>"; // TODO: DEBUG
           echo '<div class="alert alert-success">Image uploaded successfully!</div>';
         } else {
           echo '<div class="alert alert-danger">Sorry, there was an error uploading your file.</div>';
@@ -39,6 +40,8 @@
         echo '<div class="alert alert-danger">Please upload a JPG image.</div>';
       }
     }
+
+    echo "Temporary Path: " . $_FILES['image']['tmp_name'] . "<br>"; // TODO: DEBUG
 
     // Handle clear gallery button click
     if (isset($_POST['clear'])) {
@@ -85,9 +88,8 @@
       $images = glob($imageDir . '*.jpg');
       
       foreach ($images as $image) {
-        $imagePath = $_SERVER['DOCUMENT_ROOT'] . '/' . $image;
         echo '<div class="col-md-4 mb-3">';
-        echo '<img src="' . $imagePath . '" class="img-fluid">';
+        echo '<img src="' . $image . '" class="img-fluid">';
         echo '</div>';
       }
       ?>

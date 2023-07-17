@@ -3,6 +3,12 @@ FROM nginx:latest
 # Copy the nginx configuration file into the Docker container nginx configuration file
 COPY /provision/projectB.conf /etc/nginx/conf.d/default.conf
 
+# Copy the WebApp files to the Docker container
+COPY app/. /usr/src/webapp
+
+# Set Workdir as the folder with the WebApp content
+WORKDIR /usr/src/webapp
+
 # Expose nginx port
 EXPOSE 80
 
