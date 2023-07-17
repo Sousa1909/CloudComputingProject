@@ -20,8 +20,8 @@ RUN chmod 644 public_html/css/bootstrap.min.css \
     && chmod 644 public_html/css/site.css
 
 # Create gallery directory and set permissions
-RUN mkdir /usr/src/webapp/public_html/gallery \
-    && chmod 777 /usr/src/webapp/public_html/gallery
+#RUN mkdir /usr/src/webapp/public_html/gallery \
+#    && chmod 777 /usr/src/webapp/public_html/gallery
 
 # Open Port
 EXPOSE 9000
