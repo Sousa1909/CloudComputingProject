@@ -15,13 +15,15 @@ RUN apt-get update && \
     php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
     composer install
 
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo_pgsql
+
 # Set permissions for CSS files
 RUN chmod 644 public_html/css/bootstrap.min.css \
     && chmod 644 public_html/css/site.css
 
 # Create gallery directory and set permissions
-#RUN mkdir /usr/src/webapp/public_html/gallery \
-#    && chmod 777 /usr/src/webapp/public_html/gallery
+RUN chmod 777 /usr/src/webapp/public_html/data/gallery
 
 # Open Port
 EXPOSE 9000

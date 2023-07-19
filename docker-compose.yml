@@ -5,13 +5,17 @@ services:
     build:
       context: /app
       dockerfile: Dockerfile.app
+    volumes:
+      - app_gallery:/usr/src/webapp/public_html/data/gallery
 
   db:
     build:
       context: /provision
       dockerfile: Dockerfile.db
     environment:
-      - POSTGRES_PASSWORD=VerySafePassword
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
 
   websockets:
     build:
@@ -27,7 +31,14 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./gallery:/usr/scr/webapp/public_html/data/gallery
+      - app_gallery:/usr/src/webapp/public_html/data/gallery:ro # read only
 
+volumes:
+  app_gallery:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: './app/public_html/data/gallery'
 # build:  docker-compose build
 # run:    docker-compose up

@@ -17,7 +17,7 @@
     <?php
     // Handle file upload
     if (isset($_POST['submit'])) {
-      $uploadDir = 'gallery/';
+      $uploadDir = 'data/gallery/';
       
       // Check if the upload directory exists, otherwise create it
       if (!is_dir($uploadDir)) {
@@ -31,7 +31,7 @@
       // Check if the uploaded file is a JPG image
       if ($fileType === 'jpg' || $fileType === 'jpeg') {
         if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
-          echo "File moved successfully to: " . $targetPath . "<br>"; // TODO: DEBUG
+          // echo "File moved successfully to: " . $targetPath . "<br>"; // TODO: DEBUG
           echo '<div class="alert alert-success">Image uploaded successfully!</div>';
         } else {
           echo '<div class="alert alert-danger">Sorry, there was an error uploading your file.</div>';
@@ -41,11 +41,11 @@
       }
     }
 
-    echo "Temporary Path: " . $_FILES['image']['tmp_name'] . "<br>"; // TODO: DEBUG
+    // echo "Temporary Path: " . $_FILES['image']['tmp_name'] . "<br>"; // TODO: DEBUG
 
     // Handle clear gallery button click
     if (isset($_POST['clear'])) {
-        $imageDir = 'gallery/';
+        $imageDir = 'data/gallery/';
         $images = glob($imageDir . '*.jpg');
         
         foreach ($images as $image) {
@@ -84,7 +84,7 @@
     <!-- Display image gallery -->
     <div class="row">
       <?php
-      $imageDir = 'gallery/';
+      $imageDir = 'data/gallery/';
       $images = glob($imageDir . '*.jpg');
       
       foreach ($images as $image) {
